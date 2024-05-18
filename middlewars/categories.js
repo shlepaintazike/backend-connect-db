@@ -14,7 +14,7 @@ const findCategoryById = async(req, res, next) => {
     } catch (err) {
         res.status(404).send({message: 'Category not found'})
     }
-}
+};
 
 const createCategory = async(req, res, next) => {
     try {
@@ -23,6 +23,23 @@ const createCategory = async(req, res, next) => {
     } catch (err) {
         res.status(400).send({message: 'Error creating category'})
     }
-}
+};
 
-module.exports= {findAllCategories, findCategoryById, createCategory};
+const updateCategory = async(req, res, next) => {
+    try {
+        req.category = await categories.findByIdAndUpdate(req.params.id, req.body);
+        next()
+    } catch (err) {
+        res.status(400).send({message: 'Error updating category'})
+    }
+};
+
+const checkEmptyName = async (req, res, next) => {
+    if (!req.body.name) {
+        res.status(400).send({message: 'Введите название категории'})
+    } else {
+        next();
+    }
+};
+
+module.exports= {findAllCategories, findCategoryById, createCategory, updateCategory, checkEmptyName};
