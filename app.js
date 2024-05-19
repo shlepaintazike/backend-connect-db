@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const usersRouter = require('./routes/users');
-const gamesRouter = require('./routes/games');
-const categoriesRouter = require('./routes/categories');
 const connectToDatabase = require('./database/connect');
+const categoriesRouter = require('./routes/categories');
+const gamesRouter = require('./routes/games');
+const usersRouter = require('./routes/users');
 
 const PORT = 3000;
 
