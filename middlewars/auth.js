@@ -19,6 +19,14 @@ const checkAuth = (req, res, next) => {
         .send({message: 'Необходима авторизация'});
     }
     next();
+};
+
+const checkCookiesJWT = (req, res, next) => {
+    if (!req.cookies.jwt) {
+        return res.redirect ('/')
+    }
+
+    req.headers.authorization=`Bearer ${req.cookies.jwt}`;
 }
 
-module.exports = {checkAuth};
+module.exports = {checkAuth, checkCookiesJWT};
