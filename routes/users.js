@@ -3,7 +3,10 @@ const {
     sendAllUsers,
     sendUserUpdated,
     sendUserDeleted,
-    sendUserById } = require('../controllers/users');
+    sendUserById, 
+    sendMe} = require('../controllers/users');
+
+const { checkAuth } = require('../middlewars/auth');
 
 const {
     findAllUsers,
@@ -29,6 +32,7 @@ usersRouter.post(
     findAllUsers,
     checkIsUserExists,
     checkEmptyNameAndEmailAndPassword,
+    checkAuth,
     hashPassword,
     createUser,
     sendUserCreated);
@@ -36,9 +40,11 @@ usersRouter.post(
 usersRouter.put(
     '/users/:id',
     checkEmptyNameAndEmail,
+    checkAuth,
     updateUser,
     sendUserUpdated);
 
-usersRouter.delete('/users/:id', deleteUser, sendUserDeleted);
+usersRouter.delete('/users/:id', checkAuth, deleteUser, sendUserDeleted);
+usersRouter.get('/me', checkAuth, sendMe);
 
 module.exports = usersRouter;

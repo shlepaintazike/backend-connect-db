@@ -10,7 +10,7 @@ const sendUserCreated = (req, res) => {
 
 const sendUserUpdated = (_req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify({message: 'Пользователь обновлён'}))
+    res.end(JSON.stringify({ message: 'Пользователь обновлён' }))
 };
 
 const sendUserDeleted = (req, res) => {
@@ -21,6 +21,19 @@ const sendUserDeleted = (req, res) => {
 const sendUserById = (req, res) => {
     res.setHeader("Content-Type", "application/json");
     res.end(JSON.stringify(req.user));
-  };
+};
 
-module.exports={sendAllUsers, sendUserCreated, sendUserUpdated, sendUserDeleted, sendUserById};
+const sendMe = (req, res) => {
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify(req.user));
+};
+
+
+module.exports = {
+    sendAllUsers,
+    sendUserCreated,
+    sendUserUpdated,
+    sendUserDeleted,
+    sendUserById,
+    sendMe
+};
